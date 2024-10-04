@@ -108,3 +108,13 @@ if(NOT BUILD_FRAMEWORK)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/taglib_c.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
           RENAME taglib${TAGLIB_INSTALL_SUFFIX}_c.pc)
 endif()
+
+option(WASM "Build for WASM/WASI" OFF)
+
+if(WASM)
+  add_executable(tag_c_wasm ${CMAKE_SOURCE_DIR}/bindings/c/tag_c.cpp)
+  set_target_properties(tag_c_wasm PROPERTIES SUFFIX ".wasm")
+  target_compile_options(tag_c_wasm PRIVATE --target=wasm32-wasi -g0 -O2)
+  target_link_options(tag_c_wasm PRIVATE -Wl,--no-entry -Wl,--allow-undefined -Wl,@${CMAKE_CURRENT_SOURCE_DIR}/exports.txt)
+  target_link_libraries(tag_c_wasm PRIVATE tag_c)
+endif()

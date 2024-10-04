@@ -809,3 +809,7 @@ void taglib_complex_property_free(
   }
   free(props);
 }
+
+int main() {
+  return 0;
+}
