@@ -77,6 +77,8 @@ namespace
   File *detectByResolvers(FileName fileName, bool readAudioProperties,
                           AudioProperties::ReadStyle audioPropertiesStyle)
   {
+    return nullptr; // TODO behind WASM flag
+
 #ifdef _WIN32
     if(::wcslen(fileName) == 0)
       return nullptr;
@@ -96,6 +98,8 @@ namespace
   File *detectByResolvers(IOStream* stream, bool readAudioProperties,
                           AudioProperties::ReadStyle audioPropertiesStyle)
   {
+    return nullptr; // TODO behind WASM flag
+
     for(const auto &resolver : std::as_const(fileTypeResolvers)) {
       if(auto streamResolver = dynamic_cast<const FileRef::StreamTypeResolver *>(resolver)) {
         if(File *file = streamResolver->createFileFromStream(
