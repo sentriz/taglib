@@ -473,9 +473,9 @@ void FileRef::parse(FileName fileName, bool readAudioProperties,
 {
   // Try user-defined resolvers.
 
-  d->file = detectByResolvers(fileName, readAudioProperties, audioPropertiesStyle);
-  if(d->file)
-    return;
+  // d->file = detectByResolvers(fileName, readAudioProperties, audioPropertiesStyle);
+  // if(d->file)
+  //   return;
 
   // Try to resolve file types based on the file extension.
 
